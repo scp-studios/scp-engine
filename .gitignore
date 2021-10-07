@@ -41,3 +41,6 @@ CMakeCache.txt
 .ninja_log
 build.ninja
 rules.ninja
+
+# Visual Studio Code configuration files
+.vscode/*
