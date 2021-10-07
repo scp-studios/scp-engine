@@ -8,7 +8,10 @@ namespace SCP
     {
     public:
         // Constructor
-        Application() = default;
+        Application() { start(); }
+        
+        // Start the application
+        virtual void start() = 0;
         
         // Update
         virtual void update() = 0;
@@ -19,7 +22,10 @@ namespace SCP
         // Is the app still open?
         virtual bool isOpen() = 0;
         
-        virtual ~Application() {}
+        // Stop the application
+        virtual void stop() = 0;
+        
+        virtual ~Application() { stop(); }
     };
 }
 
