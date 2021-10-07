@@ -12,7 +12,7 @@ namespace SCP
     {
         // Simple function that basically just lauches an Application.
         template<typename AppClass>
-        int launchApplication()
+        int launchApplication(int argc, char** argv)
         {
             try
             {
