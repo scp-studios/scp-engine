@@ -33,4 +33,15 @@ namespace SCP
     }
 }
 
+
+
+
+// A Macro that was defined for the main function. Don't worry about it.
+#define SCP_LAUNCH_APPLICATION(x)\
+int main(int argc, char** argv)\
+{\
+    SCP::AppLauncher::launchApplication<x>(argc, argv);\
+    return 0;\
+}
+
 #endif /* D7BB7F5C_3B43_4A7E_9DCF_E7A16BB70115 */

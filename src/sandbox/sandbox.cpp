@@ -45,10 +45,4 @@ public:
     }
 };
 
-
-
-
-int main(int argc, char** argv)
-{
-    AppLauncher::launchApplication<Sandbox>(argc, argv);
-}
+SCP_LAUNCH_APPLICATION(Sandbox)
