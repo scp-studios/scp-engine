@@ -7,7 +7,7 @@ namespace AppLauncher = SCP::AppLauncher;
 class Sandbox: public SCP::Application
 {
 public:
-    void start() override
+    Sandbox()
     {
         
     }
@@ -39,7 +39,7 @@ public:
     
     
     
-    void stop() override
+    ~Sandbox()
     {
         
     }
