@@ -16,6 +16,9 @@ namespace SCP
         // Render
         virtual void render() = 0;
         
+        // Is the app still open?
+        virtual bool isOpen() = 0;
+        
         virtual ~Application() {}
     };
 }
