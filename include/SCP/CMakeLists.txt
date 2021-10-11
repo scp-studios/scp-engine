@@ -5,4 +5,4 @@ target_sources(
     "Application.hpp"
 )
 
-target_precompile_headers("scp-engine" "pch.hpp")
+target_precompile_headers("scp-engine" PRIVATE "pch.hpp")
