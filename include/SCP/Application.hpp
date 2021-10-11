@@ -1,20 +1,50 @@
 #ifndef B6E2234F_9198_4E97_98FB_59C6724D94A2
 #define B6E2234F_9198_4E97_98FB_59C6724D94A2
 
+#include <SCP/Scene.hpp>
+
 namespace SCP
 {
     // A base class for the application or game
+    template<typename StartScene>
     class Application
     {
     public:
+        // Constructor
+        Application()
+        {
+            Scene::setActive<StartScene>();
+        }
+        
+        
+        
+        
+        
         // Update
-        virtual void update() = 0;
+        void update()
+        {
+            Scene::updateActive();
+        }
+        
+        
+        
+        
         
         // Render
-        virtual void render() = 0;
+        void render()
+        {
+            Scene::renderActive();
+        }
         
-        // Is the app still open?
-        virtual bool isOpen() = 0;
+        
+        
+        
+        
+        // Destructor
+        ~Application()
+        {
+            Scene::removeActive();
+        }
     };
 }
 

@@ -4,20 +4,23 @@
 #include <stdexcept>
 #include <iostream>
 
+#include <SCP/EngineStates.hpp>
+
 namespace SCP
 {
+    template<typename T>
     class Application;
     
     namespace AppLauncher
     {
         // Simple function that basically just lauches an Application.
-        template<typename AppClass>
+        template<typename StartScene>
         int launchApplication(int argc, char** argv)
         {
             try
             {
-                AppClass app;
-                while (app.isOpen())
+                Application<StartScene> app;
+                while (EngineStates::isRunning)
                 {
                     app.update();
                     app.render();
@@ -40,8 +43,7 @@ namespace SCP
 #define SCP_LAUNCH_APPLICATION(x)\
 int main(int argc, char** argv)\
 {\
-    SCP::AppLauncher::launchApplication<x>(argc, argv);\
-    return 0;\
+    return SCP::AppLauncher::launchApplication<x>(argc, argv);\
 }
 
 #endif /* D7BB7F5C_3B43_4A7E_9DCF_E7A16BB70115 */
