@@ -19,11 +19,11 @@ endif()
 
 include_directories("include" "${GLFW_INCLUDE_DIR}")
 
-add_library("scp-engine")
+add_library("SCPEngine")
 add_executable("sandbox")
 
 add_subdirectory("src")
 add_subdirectory("include")
 
-target_link_libraries("sandbox" "scp-engine")
-target_link_libraries("scp-engine" "${GLFW_LIBRARY}")
+target_link_libraries("sandbox" "SCPEngine")
+target_link_libraries("SCPEngine" "${GLFW_LIBRARY}")

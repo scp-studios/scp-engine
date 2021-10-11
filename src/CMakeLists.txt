@@ -1,2 +1,2 @@
-add_subdirectory("scp-engine")
+add_subdirectory("SCPEngine")
 add_subdirectory("sandbox")

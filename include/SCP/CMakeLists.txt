@@ -1,8 +1,8 @@
 target_sources(
-    "scp-engine" PRIVATE
+    "SCPEngine" PRIVATE
     
     "AppLauncher.hpp"
     "Application.hpp"
 )
 
-target_precompile_headers("scp-engine" PRIVATE "pch.hpp")
+target_precompile_headers("SCPEngine" PRIVATE "pch.hpp")
