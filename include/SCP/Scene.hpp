@@ -1,0 +1,12 @@
+#ifndef ED800DE5_6D2D_45DD_94DB_E48B360E5217
+#define ED800DE5_6D2D_45DD_94DB_E48B360E5217
+
+namespace SCP
+{
+    class Scene
+    {
+        
+    };
+}
+
+#endif /* ED800DE5_6D2D_45DD_94DB_E48B360E5217 */
