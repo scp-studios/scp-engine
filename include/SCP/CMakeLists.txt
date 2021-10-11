@@ -6,3 +6,5 @@ target_sources(
 )
 
 target_precompile_headers("SCPEngine" PRIVATE "pch.hpp")
+
+add_subdirectory("Events")
