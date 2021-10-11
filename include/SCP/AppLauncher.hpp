@@ -6,11 +6,10 @@
 
 #include <SCP/EngineStates.hpp>
 
+#include <SCP/Application.hpp>
+
 namespace SCP
 {
-    template<typename T>
-    class Application;
-    
     namespace AppLauncher
     {
         // Simple function that basically just lauches an Application.
