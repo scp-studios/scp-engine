@@ -5,6 +5,7 @@ target_sources(
     "Application.hpp"
     "EngineStates.hpp"
     "EventQueue.hpp"
+    "Layer.hpp"
     "pch.hpp"
     "Scene.hpp"
 )
