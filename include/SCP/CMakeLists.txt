@@ -4,3 +4,5 @@ target_sources(
     "AppLauncher.hpp"
     "Application.hpp"
 )
+
+target_precompile_headers("scp-engine" "pch.hpp")
