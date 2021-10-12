@@ -15,7 +15,6 @@ void EventQueue::dispatch(Layer& layer)
 {
     for (uint16_t i = 0; i < m_queue.size(); i++)
     {
-        bool handled = false;
         Events::Event& event = m_queue.front();
         
         switch (event.getType())
