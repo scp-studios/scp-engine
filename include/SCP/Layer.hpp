@@ -19,9 +19,9 @@ namespace SCP
         virtual void render() = 0;
         
         // Events
-        virtual bool onKeyEvent(const Events::KeyEvent& e);
-        virtual bool onMouseClickEvent(const Events::MouseClickEvent& e);
-        virtual bool onMousePosEvent(const Events::MousePosEvent& e);
+        virtual bool onKeyEvent(const Events::KeyEvent& e) { return false; }
+        virtual bool onMouseClickEvent(const Events::MouseClickEvent& e) { return false; }
+        virtual bool onMousePosEvent(const Events::MousePosEvent& e) { return false; }
         
         virtual ~Layer();
     };
