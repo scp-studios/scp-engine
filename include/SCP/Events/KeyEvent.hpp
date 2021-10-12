@@ -5,10 +5,10 @@
 
 namespace SCP::Events
 {
-    class KeyEvents: public Event
+    class KeyEvent: public Event
     {
     public:
-        KeyEvents(int keyCode): m_keyCode(keyCode) {}
+        KeyEvent(int keyCode): m_keyCode(keyCode) {}
         
         // Get the keycode
         int getKeyCode() { return m_keyCode; }
