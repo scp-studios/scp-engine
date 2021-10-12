@@ -12,6 +12,8 @@ namespace SCP::Events
     {
     public:
         virtual EventType getType() = 0;
+        
+        virtual ~Event() {}
     };
     
     #define SCP_EVENT_TYPE(x) EventType getType() { return EventType::x; }
