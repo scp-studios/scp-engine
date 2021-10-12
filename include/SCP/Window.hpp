@@ -20,7 +20,13 @@ namespace SCP
     {
     public:
         // Obtain the instance of this window
-        static Window& getInstance();
+        static Window& getInstance(
+            int16_t width = 640, 
+            int16_t height = 480, 
+            std::string_view title = "SCP Engine Game", 
+            bool fullscreen = false,
+            bool decorated = true
+        );
         
         // The window is hidden by default, so use this function to show it.
         void show() { glfwShowWindow(m_handle); }
@@ -37,18 +43,15 @@ namespace SCP
     private:
         // Constructor
         Window(
-            int16_t width = 640, 
-            int16_t height = 480, 
-            std::string_view title = "SCP Engine Game", 
-            bool fullscreen = false,
-            bool decorated = true
+            int16_t width, int16_t height, std::string_view title,
+            bool fullscreen, bool decorated
         );
         
         // The handle to the actual window
         GLFWwindow* m_handle;
         
         // The structure containing all of the window's data
-        WindowData data;
+        WindowData m_data;
         
         // The key callback
         static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
