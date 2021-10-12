@@ -15,12 +15,12 @@ namespace SCP
         static EventQueue& getInstance();
         
         // Add an event to the queue
-        void add(const Events::Event& event) { m_queue.push(event); }
+        void add(std::shared_ptr<Events::Event> event) { m_queue.push(event); }
         
         // Dispatch the event queue to a layer
         void dispatch(Layer& layer);
     private:
-        std::queue<Events::Event> m_queue;
+        std::queue<std::shared_ptr<Events::Event>> m_queue;
     };
 }
 
