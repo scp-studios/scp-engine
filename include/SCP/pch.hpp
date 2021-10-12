@@ -6,5 +6,6 @@
 #include <queue>
 #include <string_view>
 #include <cstdint>
+#include <memory>
 
 #endif /* A9784BED_1688_44A7_999D_264ED7ED09D9 */
