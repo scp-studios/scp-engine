@@ -4,4 +4,5 @@ target_sources(
     "EngineStates.cpp"
     "EventQueue.cpp"
     "Scene.cpp"
+    "Window.cpp"
 )
