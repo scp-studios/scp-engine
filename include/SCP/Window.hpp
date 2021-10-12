@@ -54,19 +54,31 @@ namespace SCP
         WindowData m_data;
         
         // The key callback
-        static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+        static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+        {
+            EventQueue::getInstance().add(std::make_shared<KeyEvent>(key));
+        }
         
         // The mouse button callback
-        static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
+        static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+        {
+            EventQueue::getInstance().add(std::make_shared<MouseClickEvent>(button));
+        }
         
         // The mouse position callback
-        static void mousePositionCallback(GLFWwindow* window, double xpos, double ypos);
+        static void mousePositionCallback(GLFWwindow* window, double xpos, double ypos)
+        {
+            EventQueue::getInstance().add(std::make_shared<MousePosEvent>(xpos, ypos));
+        }
         
         // The framebuffer size callback
         static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
         
         // The error callback
-        static void errorCallback(int code, const char* msg);
+        static void errorCallback(int code, const char* msg)
+        {
+            std::cerr << "[GLFW ERROR]: " << msg << std::endl;
+        }
     };
 }
 
