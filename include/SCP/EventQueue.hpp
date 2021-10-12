@@ -18,7 +18,7 @@ namespace SCP
         void add(const Events::Event& event) { m_queue.push(event); }
         
         // Dispatch the event queue to a layer
-        void dispatch(const Layer& layer);
+        void dispatch(Layer& layer);
     private:
         std::queue<Events::Event> m_queue;
     };
