@@ -15,7 +15,7 @@ namespace SCP
         uint16_t m_height;
     };
     
-    // A wrapper class around a GLFW window. Simple.
+    // A wrapper class around a GLFW window. Simple. It only supports GLFW with OpenGL so far though.
     class Window
     {
     public:
