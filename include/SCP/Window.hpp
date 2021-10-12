@@ -64,6 +64,9 @@ namespace SCP
         
         // The framebuffer size callback
         static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
+        
+        // The error callback
+        static void errorCallback(int code, const char* msg);
     };
 }
 
