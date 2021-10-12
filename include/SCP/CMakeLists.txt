@@ -8,6 +8,7 @@ target_sources(
     "Layer.hpp"
     "pch.hpp"
     "Scene.hpp"
+    "Window.hpp"
 )
 
 target_precompile_headers("SCPEngine" PRIVATE "pch.hpp")
