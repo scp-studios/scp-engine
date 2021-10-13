@@ -1,10 +1,5 @@
 #include <SCP/pch.hpp>
 
-#include <SCP/EventQueue.hpp>
-#include <SCP/Events/KeyEvent.hpp>
-#include <SCP/Events/MouseClickEvent.hpp>
-#include <SCP/Events/MousePosEvent.hpp>
-
 #include <SCP/Window.hpp>
 
 using SCP::Window;
@@ -110,6 +105,4 @@ void Window::framebufferSizeCallback(GLFWwindow* window, int width, int height)
     WindowData* user = reinterpret_cast<WindowData*>(glfwGetWindowUserPointer(window));
     user->m_width = width;
     user->m_height = height;
-    
-    glViewport(0, 0, width, height);
 }
