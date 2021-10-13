@@ -10,6 +10,8 @@
 
 #include <SCP/EventQueue.hpp>
 
+#include <SCP/EngineStates.hpp>
+
 namespace SCP
 {
     const int16_t SCREEN_WIDTH = -1;
@@ -75,6 +77,12 @@ namespace SCP
         static void mousePositionCallback(GLFWwindow* window, double xpos, double ypos)
         {
             EventQueue::getInstance().add(std::make_shared<Events::MousePosEvent>(xpos, ypos));
+        }
+        
+        // The close callback
+        static void windowCloseCallback(GLFWwindow* window)
+        {
+            EngineStates::isRunning = false;
         }
         
         // The framebuffer size callback

@@ -98,6 +98,7 @@ Window::Window(
     glfwSetKeyCallback(m_handle, keyCallback);
     glfwSetMouseButtonCallback(m_handle, mouseButtonCallback);
     glfwSetCursorPosCallback(m_handle, mousePositionCallback);
+    glfwSetWindowCloseCallback(m_handle, windowCloseCallback);
     
     glfwSetWindowUserPointer(m_handle, &m_data);
 }
