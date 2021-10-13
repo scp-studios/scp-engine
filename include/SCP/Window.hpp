@@ -4,6 +4,12 @@
 #include <SCP/pch.hpp>
 #include <GLFW/glfw3.h>
 
+#include <SCP/Events/KeyEvent.hpp>
+#include <SCP/Events/MouseClickEvent.hpp>
+#include <SCP/Events/MousePosEvent.hpp>
+
+#include <SCP/EventQueue.hpp>
+
 namespace SCP
 {
     const int16_t SCREEN_WIDTH = -1;
@@ -56,19 +62,19 @@ namespace SCP
         // The key callback
         static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
         {
-            EventQueue::getInstance().add(std::make_shared<KeyEvent>(key));
+            EventQueue::getInstance().add(std::make_shared<Events::KeyEvent>(key));
         }
         
         // The mouse button callback
         static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
         {
-            EventQueue::getInstance().add(std::make_shared<MouseClickEvent>(button));
+            EventQueue::getInstance().add(std::make_shared<Events::MouseClickEvent>(button));
         }
         
         // The mouse position callback
         static void mousePositionCallback(GLFWwindow* window, double xpos, double ypos)
         {
-            EventQueue::getInstance().add(std::make_shared<MousePosEvent>(xpos, ypos));
+            EventQueue::getInstance().add(std::make_shared<Events::MousePosEvent>(xpos, ypos));
         }
         
         // The framebuffer size callback
