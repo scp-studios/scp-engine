@@ -7,7 +7,9 @@ using SCP::Window;
 
 TestScene::TestScene()
 {
-    Window::getInstance(1280, 720, "Sandbox", false, true);
+    Window& window = Window::getInstance(1280, 720, "Sandbox", false, true);
+    
+    window.show();
 }
 
 
