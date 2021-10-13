@@ -1,10 +1,13 @@
 #include <iostream>
+#include <SCP/Window.hpp>
 
 #include "TestScene.hpp"
 
+using SCP::Window;
+
 TestScene::TestScene()
 {
-    std::cout << "[INFO]: Starting the test scene." << std::endl;
+    Window::getInstance(1280, 720, "Sandbox", false, true);
 }
 
 
@@ -12,7 +15,7 @@ TestScene::TestScene()
 
 void TestScene::update()
 {
-    std::cout << "[INFO]: Updating the game." << std::endl;
+    Window::getInstance().update();
 }
 
 
@@ -20,7 +23,7 @@ void TestScene::update()
 
 void TestScene::render()
 {
-    std::cout << "[INFO]: Rendering the game." << std::endl;
+   
 }
 
 
@@ -28,5 +31,5 @@ void TestScene::render()
 
 TestScene::~TestScene()
 {
-    std::cout << "[INFO]: Switching out of the Test scene." << std::endl;
+    
 }
