@@ -73,11 +73,17 @@ Window::Window(
     if (width == SCREEN_WIDTH)
     {
         m_data.m_width = videoMode->width;
+    } else 
+    {
+        m_data.m_width = width;
     }
     
     if (height == SCREEN_HEIGHT)
     {
         m_data.m_height = videoMode->height;
+    } else
+    {
+        m_data.m_height = height;
     }
     
     m_handle = glfwCreateWindow(m_data.m_width, m_data.m_height, title.data(), monitor, nullptr);
