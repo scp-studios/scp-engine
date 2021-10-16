@@ -8,15 +8,18 @@ using SCP::Events::KeyEvent;
 using SCP::Events::MouseClickEvent;
 using SCP::Events::MousePosEvent;
 
+using SCP::Graphics::API;
+
 Window& Window::getInstance(
     int16_t width, 
     int16_t height, 
     std::string_view title, 
     bool fullscreen,
-    bool decorated
+    bool decorated,
+    API api
 )
 {
-    static Window window(width, height, title, fullscreen, decorated);
+    static Window window(width, height, title, fullscreen, decorated, api);
     return window;
 }
 
@@ -45,7 +48,7 @@ Window::~Window()
 
 Window::Window(
     int16_t width, int16_t height, std::string_view title,
-    bool fullscreen, bool decorated
+    bool fullscreen, bool decorated, API api
 ) {
     if (!glfwInit())
     {
@@ -54,9 +57,12 @@ Window::Window(
     
     glfwSetErrorCallback(errorCallback);
     
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    if (api == API::OpenGL)
+    {
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    }
     
     glfwWindowHint(GLFW_DECORATED, decorated);
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
@@ -93,7 +99,10 @@ Window::Window(
         throw std::runtime_error("Failed to create GLFW window.");
     }
     
-    glfwMakeContextCurrent(m_handle);
+    if (api == API::OpenGL)
+    {
+        glfwMakeContextCurrent(m_handle);
+    }
     
     glfwSetKeyCallback(m_handle, keyCallback);
     glfwSetMouseButtonCallback(m_handle, mouseButtonCallback);

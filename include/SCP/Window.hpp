@@ -12,6 +12,8 @@
 
 #include <SCP/EngineStates.hpp>
 
+#include <SCP/Graphics/API.hpp>
+
 namespace SCP
 {
     const int16_t SCREEN_WIDTH = -1;
@@ -23,7 +25,7 @@ namespace SCP
         uint16_t m_height;
     };
     
-    // A wrapper class around a GLFW window. Simple. It only supports GLFW with OpenGL so far though.
+    // A wrapper class around a GLFW window. Simple.
     class Window
     {
     public:
@@ -33,7 +35,8 @@ namespace SCP
             int16_t height = 480, 
             std::string_view title = "SCP Engine Game", 
             bool fullscreen = false,
-            bool decorated = true
+            bool decorated = true,
+            Graphics::API api = Graphics::API::OpenGL
         );
         
         // The window is hidden by default, so use this function to show it.
@@ -52,7 +55,7 @@ namespace SCP
         // Constructor
         Window(
             int16_t width, int16_t height, std::string_view title,
-            bool fullscreen, bool decorated
+            bool fullscreen, bool decorated, API api
         );
         
         // The handle to the actual window
