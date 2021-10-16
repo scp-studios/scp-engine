@@ -55,7 +55,7 @@ namespace SCP
         // Constructor
         Window(
             int16_t width, int16_t height, std::string_view title,
-            bool fullscreen, bool decorated, API api
+            bool fullscreen, bool decorated, Graphics::API api
         );
         
         // The handle to the actual window
