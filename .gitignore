@@ -15,3 +15,6 @@ build.ninja
 # Libraries
 *.a
 *.so
+
+# Visual Studio Code user configuration files
+.vscode/settings.json
