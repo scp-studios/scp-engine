@@ -16,6 +16,11 @@ build.ninja
 *.a
 *.so
 
+# Executables
+*.exe 
+*.app 
+/bin/
+
 # Visual Studio Code user configuration files
 .vscode/settings.json
 .vscode/c_cpp_properties.json
