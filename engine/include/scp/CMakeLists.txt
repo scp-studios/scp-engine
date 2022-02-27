@@ -1,7 +1,7 @@
 target_sources(
     scp-engine PRIVATE
     
-    event_type.hpp
+    event-type.hpp
     event.hpp
     fatal-error.hpp
     game-launcher.hpp
