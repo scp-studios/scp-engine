@@ -1,3 +1,5 @@
+#include "pch.hpp"
+
 #include <scp/launch-configuration.hpp>
 #include <scp/game-launcher.hpp>
 #include <iostream>
