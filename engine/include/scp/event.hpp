@@ -1,6 +1,8 @@
 #ifndef EF09A24D_9E79_48B7_BBFE_AED0D7199449
 #define EF09A24D_9E79_48B7_BBFE_AED0D7199449
 
+typedef uint32_t;
+
 namespace scp
 {
     // A generic event class. It is used within the event system. Every event 
