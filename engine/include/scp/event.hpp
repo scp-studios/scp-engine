@@ -17,7 +17,7 @@ namespace scp
         // onstructors.
         
         // Returns the type of the event.
-        virtual event_type_t get_type() = 0;
+        virtual event_type_t get_type() const = 0;
     };
 }
 

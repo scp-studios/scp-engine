@@ -26,7 +26,7 @@ namespace scp::events
         // Is it a press, release, or a repeat.
         key_type_t type;
         
-        event_type_t get_type() override { return event_type_t::KEY; }
+        event_type_t get_type() const override { return event_type_t::KEY; }
     };
 }
 
