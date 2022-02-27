@@ -3,23 +3,30 @@
 
 typedef int32_t;
 
+// We have to include the event header because we are inhereting from the event
+// class
+#include <scp/event.hpp>
+#include <scp/event-type.hpp>
+
 namespace scp::events
 {
     // A single key event. Contains all the information required.
-    struct key_t
+    struct key_t: public event_t
     {
         // We are using GLFW keycodes for now, but that should change in the f-
         // uture.
         int32_t key_code;
         
         // What type of key event is it.
-        enum class type_t
+        enum class key_type_t
         {
             PRESS, RELEASE, REPEAT
         };
         
         // Is it a press, release, or a repeat.
-        type_t type;
+        key_type_t type;
+        
+        event_type_t get_type() override { return event_type_t::KEY; }
     };
 }
 
