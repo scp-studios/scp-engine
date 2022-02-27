@@ -7,3 +7,5 @@ target_sources(
     game-launcher.hpp
     launch-configuration.hpp
 )
+
+add_subdirectory(events)
