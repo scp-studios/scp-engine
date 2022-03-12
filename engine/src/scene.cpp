@@ -4,7 +4,7 @@ using scp::scene_t;
 
 scene_t::scene_t()
 {
-
+	// Placeholder
 }
 
 void scene_t::set_active(scene_t* p_new_active)
@@ -29,7 +29,7 @@ void scene_t::render_active()
 
 scene_t::~scene_t()
 {
-
+	// Placeholder
 }
 
 void scene_t::update(double p_delta_time)
