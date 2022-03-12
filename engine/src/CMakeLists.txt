@@ -7,3 +7,5 @@ target_sources(
 )
 
 target_precompile_headers(scp-engine PRIVATE pch.hpp)
+
+add_subdirectory(platform)
