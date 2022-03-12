@@ -4,8 +4,9 @@ using scp::window_t;
 
 window_t::window_t(int32_t width, int32_t height, std::string_view title, bool fullscreen)
 {
-	// Placeholder for now. We will add more later on.
-	m_implementation = nullptr;
+	// If there are no available implementations, then simply set this as itse-
+	// lf, of which has implementation functions that does nothing.
+	m_implementation = this;
 }
 
 bool window_t::is_open() const
