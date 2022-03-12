@@ -8,4 +8,8 @@
 #include <string_view>
 #include <functional>
 
+#ifdef SCP_PLATFORM_WINDOWS
+#include <Windows.h>
+#endif
+
 #endif /* A3C3C78D_EAD9_402A_9178_89B07B9611B7 */
