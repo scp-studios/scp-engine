@@ -2,10 +2,11 @@
 #define E0D7FDB6_0502_4472_9924_C8E5587C0AEF
 
 #include <string_view>
+#include <scp/scp.hpp>
 
 namespace scp
 {
-    class fatal_error_t
+    class SCPEXP fatal_error_t
     {
     public:
         fatal_error_t(std::string_view what): m_what(what) {}

@@ -5,13 +5,14 @@ typedef int32_t;
 
 // We have to include the event header because we are inhereting from the event
 // class
+#include <scp/scp.hpp>
 #include <scp/event.hpp>
 #include <scp/event-type.hpp>
 
 namespace scp::events
 {
     // A single key event. Contains all the information required.
-    struct key_t: public event_t
+    struct SCPEXP key_t: public event_t
     {
         // We are using GLFW keycodes for now, but that should change in the f-
         // uture.

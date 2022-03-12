@@ -1,6 +1,8 @@
 #ifndef EF09A24D_9E79_48B7_BBFE_AED0D7199449
 #define EF09A24D_9E79_48B7_BBFE_AED0D7199449
 
+#include <scp/scp.hpp>
+
 typedef uint32_t;
 
 namespace scp
@@ -10,7 +12,7 @@ namespace scp
     // A generic event class. It is used within the event system. Every event 
     // type that can be dispatched must inherit this class in order for them to
     // work.
-    class event_t
+    class SCPEXP event_t
     {
     public:
         // C++ will automatically insert a default constructor and all other c-

@@ -6,6 +6,7 @@
 // cause both classes are rather short, and they are kind of related in one way
 // or another, so why not include both?
 
+#include <scp/scp.hpp>
 #include <scp/event.hpp>
 #include <scp/event-type.hpp>
 
@@ -14,7 +15,7 @@ typedef int32_t;
 namespace scp
 {
     // No comments needed
-    struct mouse_button_t: public event_t
+    struct SCPEXP mouse_button_t: public event_t
     {
         // We are currently using GLFW mouse codes, but that should change in 
         // the future.
@@ -27,7 +28,7 @@ namespace scp
     };
     
     // No comments needed
-    struct mouse_position: public event_t
+    struct SCPEXP mouse_position: public event_t
     {
         // Where is the mouse x and y position?
         uint32_t x;
@@ -40,7 +41,7 @@ namespace scp
     };
     
     // No comments needed
-    struct scroll_t: public event_t
+    struct SCPEXP scroll_t: public event_t
     {
         // How much is the mouse scrolled on the x and y axis?
         double x;

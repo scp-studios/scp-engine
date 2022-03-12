@@ -1,6 +1,8 @@
 #ifndef AE110287_7E2D_4C47_9DEE_BF7630C9BC82
 #define AE110287_7E2D_4C47_9DEE_BF7630C9BC82
 
+#include <scp/scp.hpp>
+
 namespace scp
 {
     // Forward declaration.
@@ -10,7 +12,7 @@ namespace scp
     // for now, it does not take any options.
     namespace game_launcher
     {
-        int launch_game(const launch_configuration_t& launch_configuration);
+        int SCPEXP launch_game(const launch_configuration_t& launch_configuration);
     }
 }
 

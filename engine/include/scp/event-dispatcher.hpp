@@ -2,6 +2,7 @@
 #define CDC84E6A_90BB_4162_99DE_54E74478F92A
 
 #include <functional>
+#include <scp/scp.hpp>
 
 namespace scp
 {
@@ -13,7 +14,7 @@ namespace scp
     
     // A simple event dispatcher for dispatching events. It abstracts the deta-
     // ils of dispatching events away.
-    class event_dispatcher
+    class SCPEXP event_dispatcher
     {
     public:
         // Constructor.
