@@ -41,7 +41,7 @@ namespace scp
 		window_t* m_implementation;
 
 		// The implementation functions.
-		virtual bool is_open_impl() const {}
+		virtual bool is_open_impl() const { return false;  }
 		virtual void show_impl() const {}
 		virtual void update_impl() const {}
 	};
