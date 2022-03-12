@@ -9,6 +9,7 @@ target_sources(
     launch-configuration.hpp
     scene.hpp
     scp.hpp
+    window.hpp
 )
 
 add_subdirectory(events)
