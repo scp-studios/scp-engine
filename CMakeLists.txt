@@ -12,5 +12,9 @@ else()
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 endif()
 
+if (WIN32)
+    add_compile_definitions(SCP_PLATFORM_WINDOWS)
+endif()
+
 add_subdirectory(engine)
 add_subdirectory(sandbox)
