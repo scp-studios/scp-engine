@@ -13,3 +13,10 @@ endif()
 file(GLOB AAAA include/scp/events/*.hpp)
 source_group("Header Files\\Events" FILES ${AAAA})
 source_group("Source Files" FILES src/pch.hpp)
+
+# Windows specific source group.
+if (WIN32)
+    file(GLOB AAAB src/platform/windows/*.cpp)
+    file(GLOB AAAC src/platform/windows/*.hpp)
+    source_group("Source Files\\Windows-Specific Code" FILES ${AAAB} ${AAAC})
+endif()
