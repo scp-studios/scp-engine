@@ -62,6 +62,7 @@ window_t::window_t(int32_t p_width, int32_t p_height, std::string_view p_title, 
 	if (!m_handle)
 	{
 		std::cerr << "[ERROR]: Failed to create the window " << p_title << std::endl;
+		m_is_open = false;
 		return;
 	}
 }
