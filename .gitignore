@@ -17,6 +17,7 @@ build.ninja
 *.ilk
 *.pdb
 .vs
+*.dir/
 
 # Precompiled Headers
 *.pch
