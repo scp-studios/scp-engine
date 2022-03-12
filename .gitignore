@@ -8,6 +8,20 @@ build.ninja
 .ninja_log
 .ninja_deps
 
+# Visual Studio Clutters
+*.sln
+*.vcxproj*
+*.tlog
+*.log
+*.recipe
+*.ilk
+*.pdb
+.vs
+
+# Precompiled Headers
+*.pch
+*.gch
+
 # Object files
 *.o 
 *.obj
@@ -15,6 +29,7 @@ build.ninja
 # Libraries
 *.a
 *.so
+*.lib
 
 # Executables
 *.exe 
