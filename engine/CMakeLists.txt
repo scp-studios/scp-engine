@@ -8,3 +8,8 @@ add_subdirectory(include/scp)
 if (WIN32 AND BUILD_SHARED_LIBS)
     target_compile_definitions(scp-engine PRIVATE SCP_ENGINE_BUILD_DLL)
 endif()
+
+# Source groups
+file(GLOB AAAA include/scp/events/*.hpp)
+source_group("Header Files\\Events" FILES ${AAAA})
+source_group("Source Files" FILES src/pch.hpp)
