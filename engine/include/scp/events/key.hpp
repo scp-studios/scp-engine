@@ -14,8 +14,8 @@ namespace scp::events
     // A single key event. Contains all the information required.
     struct SCPEXP key_t: public event_t
     {
-        // We are using GLFW keycodes for now, but that should change in the f-
-        // uture.
+        // We haven't decided on the keycode just yet, so right now they are j-
+        // ust integers.
         int32_t key_code;
         
         // What type of key event is it.
