@@ -3,6 +3,7 @@ target_sources(
     
     game-launcher.cpp
     scene.cpp
+    window.cpp
     pch.hpp
 )
 
