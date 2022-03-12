@@ -1,11 +1,14 @@
 target_sources(
     scp-engine PRIVATE
     
+    event-dispatcher.hpp
     event-type.hpp
     event.hpp
     fatal-error.hpp
     game-launcher.hpp
     launch-configuration.hpp
+    scene.hpp
+    scp.hpp
 )
 
 add_subdirectory(events)
