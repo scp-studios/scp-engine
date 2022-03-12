@@ -14,6 +14,8 @@ endif()
 
 if (WIN32)
     add_compile_definitions(SCP_PLATFORM_WINDOWS)
+elseif(UNIX AND NOT APPLE)
+    add_compile_definitions(SCP_PLATFORM_LINUX)
 endif()
 
 add_subdirectory(engine)
