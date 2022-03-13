@@ -2,6 +2,10 @@
 
 #ifdef SCP_PLATFORM_WINDOWS
 #include "platform/windows/window.hpp"
+#else
+	#ifdef SCP_PLATFORM_LINUX
+		#include "platform/linux/x11-window.hpp"
+	#endif
 #endif
 
 using scp::window_t;
@@ -11,7 +15,9 @@ window_t::window_t(int32_t width, int32_t height, std::string_view title, bool f
 #ifdef SCP_PLATFORM_WINDOWS
 	m_implementation = new platform::windows::window_t(width, height, title, fullscreen);
 #else
-	m_implementation = this;
+	#ifdef SCP_PLATFORM_LINUX
+		m_implementation = new scp::platform::linux_n::x11_window_t(width, height, title, fullscreen);
+	#endif
 #endif
 }
 
