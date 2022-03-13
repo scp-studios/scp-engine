@@ -4,35 +4,30 @@
 
 using scp::platform::windows::window_t;
 
-// To keep track of whether the window class is already registered.
-static bool is_window_class_already_registered = false;
-
 // The name of the window class (for the Windows API, of course).
-static LPCWSTR WINDOW_CLASS_NAME = L"scp::platform::windows::window_t";
+static const wchar_t* WINDOW_CLASS_NAME = L"scp::platform::windows::window_t";
+
+std::unordered_map<HWND, window_t*> window_t::window_map;
+
+static const wchar_t* GetWC(const char* c)
+{
+	const size_t cSize = strlen(c) + 1;
+	wchar_t* wc = new wchar_t[cSize];
+	mbstowcs(wc, c, cSize);
+
+	return wc;
+}
 
 // The global window procedure, used by almost all of the windows.
 LRESULT window_t::global_window_procedure(HWND p_window, UINT p_message, WPARAM p_wide_parameter, LPARAM p_long_parameter)
 {
-	window_t* window;
-
-	if (p_message == WM_NCCREATE)
+	if (window_map.find(p_window) != window_map.end())
 	{
-		CREATESTRUCT* create_struct = (CREATESTRUCT*)p_long_parameter;
-		window = (window_t*)create_struct->lpCreateParams;
-		SetWindowLongPtrW(p_window, GWLP_USERDATA, (LONG_PTR)window);
+		return window_map.at(p_window)->window_procedure(p_message, p_wide_parameter, p_long_parameter);
 	}
 	else
 	{
-		window = (window_t*)GetWindowLongPtr(p_window, GWLP_USERDATA);
-	}
-
-	if (window)
-	{
-		return window->window_procedure(p_message, p_wide_parameter, p_long_parameter);
-	}
-	else
-	{
-		return DefWindowProc(p_window, p_message, p_wide_parameter, p_long_parameter);
+		return DefWindowProcW(p_window, p_message, p_wide_parameter, p_long_parameter);
 	}
 }
 
@@ -40,31 +35,30 @@ window_t::window_t(int32_t p_width, int32_t p_height, std::string_view p_title, 
 {
 	m_is_open = true;
 
-	if (!is_window_class_already_registered)
-	{
-		WNDCLASSW window_class = {};
-		window_class.hInstance = GetModuleHandleW(nullptr);
-		window_class.lpszClassName = WINDOW_CLASS_NAME;
-		window_class.lpfnWndProc = global_window_procedure;
-		window_class.style = CS_OWNDC;
-		
-		RegisterClassW(&window_class);
+	WNDCLASSW window_class = {};
+	window_class.hInstance = GetModuleHandleW(nullptr);
+	window_class.lpszClassName = WINDOW_CLASS_NAME;
+	window_class.lpfnWndProc = global_window_procedure;
+	window_class.style = CS_OWNDC;
+	window_class.hCursor = LoadCursorA(nullptr, IDC_ARROW);
 
-		is_window_class_already_registered = true;
-	}
+	RegisterClassW(&window_class);
 
-	// Convert the title into a Unicode string.
-	PWSTR title = nullptr;
-	mbstowcs(title, p_title.data(), p_title.size());
+	wchar_t* title = new wchar_t[p_title.size() + 1];
+	mbstowcs(title, p_title.data(), p_title.size() + 1);
 
-	m_handle = CreateWindowExW(0, WINDOW_CLASS_NAME, title, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, p_width, p_height, nullptr, nullptr, GetModuleHandleW(nullptr), this);
+	m_handle = CreateWindowExW(0, WINDOW_CLASS_NAME, title, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, p_width, p_height, nullptr, nullptr, GetModuleHandleW(nullptr), nullptr);
 
 	if (!m_handle)
 	{
-		std::cerr << "[ERROR]: Failed to create the window " << p_title << std::endl;
+		std::cerr << "[WIN32 ERROR " << GetLastError() << "]: Failed to create the window " << p_title << std::endl;
 		m_is_open = false;
 		return;
 	}
+
+	window_map.insert(std::pair(m_handle, this));
+
+	delete[] title;
 }
 
 bool window_t::is_open_impl() const
@@ -74,7 +68,7 @@ bool window_t::is_open_impl() const
 
 void window_t::show_impl() const
 {
-	ShowWindow(m_handle, SW_SHOW);
+	ShowWindow(m_handle, SW_SHOWNORMAL);
 }
 
 void window_t::update_impl() const
@@ -99,6 +93,13 @@ LRESULT window_t::window_procedure(UINT p_message, WPARAM p_wide_parameter, LPAR
 	case WM_CLOSE:
 		m_is_open = false;
 		return 0;
+	case WM_PAINT:
+	{
+		PAINTSTRUCT ps = {};
+		BeginPaint(m_handle, &ps);
+		EndPaint(m_handle, &ps);
+		return 0;
+	}
 	default:
 		return DefWindowProcW(m_handle, p_message, p_wide_parameter, p_long_parameter);
 	}

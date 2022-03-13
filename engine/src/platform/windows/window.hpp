@@ -10,6 +10,7 @@ typedef WPARAM;
 typedef LPARAM;
 
 #include <scp/window.hpp>
+#include <unordered_map>
 
 namespace scp::platform::windows
 {
@@ -42,6 +43,11 @@ namespace scp::platform::windows
 
 		// Whether the window is open or not.
 		bool m_is_open;
+
+		// The map of all the window classes and their HWNDs. I have to use th-
+		// is approach because using window long pointers aren't working for s-
+		// ome reasons.
+		static std::unordered_map<HWND, window_t*> window_map;
 
 		// The global window procedure
 		static LRESULT global_window_procedure(HWND p_window, UINT p_message, WPARAM p_wide_parameter, LPARAM p_long_parameter);
