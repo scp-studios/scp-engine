@@ -43,6 +43,6 @@ namespace scp
 		// The implementation functions.
 		virtual bool is_open_impl() const { return false;  }
 		virtual void show_impl() const {}
-		virtual void update_impl() const {}
+		virtual void update_impl() {}
 	};
 }

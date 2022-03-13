@@ -71,7 +71,7 @@ void window_t::show_impl() const
 	ShowWindow(m_handle, SW_SHOWNORMAL);
 }
 
-void window_t::update_impl() const
+void window_t::update_impl()
 {
 	// Polls the event.
 	MSG message = {};

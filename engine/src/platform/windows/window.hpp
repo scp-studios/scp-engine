@@ -8,6 +8,7 @@ typedef HWND;
 typedef UINT;
 typedef WPARAM;
 typedef LPARAM;
+typedef LRESULT;
 
 #include <scp/window.hpp>
 #include <unordered_map>
@@ -33,7 +34,7 @@ namespace scp::platform::windows
 		void show_impl() const override;
 
 		// Updates the window (here, it just polls the events.)
-		void update_impl() const override;
+		void update_impl() override;
 
 		// Destructor
 		virtual ~window_t();
