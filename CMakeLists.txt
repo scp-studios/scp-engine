@@ -18,5 +18,12 @@ elseif(UNIX AND NOT APPLE)
     add_compile_definitions(SCP_PLATFORM_LINUX)
 endif()
 
+# Use absolute paths because it makes things much easier. Of course, this is o-
+# nly available on Clang.
+if (CMAKE_CXX_COMPILER_ID MATCHES Clang)
+    add_compile_options(-fdiagnostics-absolute-paths)
+    add_link_options(-fdiagnostics-absolute-paths)
+endif()
+
 add_subdirectory(engine)
 add_subdirectory(sandbox)
