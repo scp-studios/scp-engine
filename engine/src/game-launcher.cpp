@@ -6,13 +6,17 @@
 #include <scp/fatal-error.hpp>
 #include <cstdlib>
 
+#include <scp/window.hpp>
+
 // Runs the game with the main loop and all that stuff.
 static void run()
 {
-    // Currently just an infinite loop to get everything setted up.
-    while (true)
+    scp::window_t window(1280, 720, "SCP Engine Sandbox", false);
+
+    window.show();
+    while (window.is_open())
     {
-        
+        window.update();
     }
 }
 
