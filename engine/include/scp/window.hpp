@@ -36,13 +36,5 @@ namespace scp
 
 		// No comments needed here.
 		virtual ~window_t();
-	private:
-		// The actual window object with the implementations.
-		window_t* m_implementation;
-
-		// The implementation functions.
-		virtual bool is_open_impl() const { return false;  }
-		virtual void show_impl() const {}
-		virtual void update_impl() {}
 	};
 }

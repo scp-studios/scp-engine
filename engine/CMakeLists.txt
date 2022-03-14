@@ -9,11 +9,10 @@ if (WIN32 AND BUILD_SHARED_LIBS)
     target_compile_definitions(scp-engine PRIVATE SCP_ENGINE_BUILD_DLL)
 endif()
 
-if (UNIX AND NOT APPLE)
-    find_package(X11)
-    target_include_directories(scp-engine PRIVATE ${X11_INCLUDE_DIR})
-    target_link_libraries(scp-engine PRIVATE ${X11_LIBRARIES})
-endif()
+find_package(GLFW)
+
+target_include_directories(scp-engine PRIVATE ${GLFW_INCLUDE_DIR})
+target_link_libraries(scp-engine GLFW::GLFW)
 
 # Source groups
 file(GLOB AAAA include/scp/events/*.hpp)
