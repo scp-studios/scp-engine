@@ -39,8 +39,8 @@ x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p
     
     XSelectInput(m_display_handle, m_handle, KeyPressMask | KeyReleaseMask | ButtonPressMask | ButtonReleaseMask | PointerMotionMask);
     
-    WM_DELETE_WINDOW = XInternAtom(m_display_handle, "WM_DELETE_WINDOW", false);
-    WM_PROTOCOLS = XInternAtom(m_display_handle, "WM_PROTOCOLS", false);
+    WM_DELETE_WINDOW = XInternAtom(m_display_handle, "WM_DELETE_WINDOW", False);
+    WM_PROTOCOLS = XInternAtom(m_display_handle, "WM_PROTOCOLS", False);
     
     XSetWMProtocols(m_display_handle, m_handle, &WM_DELETE_WINDOW, 1);
 }
@@ -71,14 +71,12 @@ void x11_window_t::handle_events()
         {
         case ClientMessage:
             std::cout << "Hello!" << std::endl;
-            if (event.xclient.message_type == WM_PROTOCOLS && event.xclient.data.l[0] == WM_DELETE_WINDOW)
+            if ((event.xclient.message_type == WM_PROTOCOLS) && (event.xclient.data.l[0] == WM_DELETE_WINDOW))
             {
                 m_is_open = false;
                 break;
             }
         }
-        
-        std::cout << "no events" << std::endl;
     }
 }
 

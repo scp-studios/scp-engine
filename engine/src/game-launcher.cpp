@@ -14,7 +14,7 @@ static void run()
     scp::window_t window(1280, 720, "SCP Engine Sandbox", false);
 
     window.show();
-    while (true)
+    while (window.is_open())
     {
         window.update();
     }
