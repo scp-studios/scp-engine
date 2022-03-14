@@ -44,6 +44,10 @@ namespace scp::platform::linux_n
         // Whether the window is open or not.
         bool m_is_open;
         
+        // The width and height of the window.
+        uint16_t m_width;
+        uint16_t m_height;
+        
         // These are for the window closing mechanisms.
         Atom WM_DELETE_WINDOW;
         Atom WM_PROTOCOLS;

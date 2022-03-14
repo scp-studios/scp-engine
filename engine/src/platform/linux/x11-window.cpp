@@ -6,7 +6,7 @@
 
 using scp::platform::linux_n::x11_window_t;
 
-x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p_title, bool p_fullscreen)
+x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p_title, bool p_fullscreen): m_width(p_width), m_height(p_height)
 {
     m_display_handle = XOpenDisplay(nullptr);
     if (!m_display_handle)
@@ -15,6 +15,8 @@ x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p
         m_is_open = false;
         return;
     }
+    
+    int32_t screen = DefaultScreen(m_display_handle);
     
     m_is_open = true;
     
@@ -26,8 +28,8 @@ x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p
         p_width, // width
         p_height, // height
         0, // border width
-        WhitePixel(m_display_handle, DefaultScreen(m_display_handle)),
-        BlackPixel(m_display_handle, DefaultScreen(m_display_handle))
+        WhitePixel(m_display_handle, screen),
+        BlackPixel(m_display_handle, screen)
     );
     if (!m_handle)
     {
@@ -53,6 +55,13 @@ bool x11_window_t::is_open_impl() const
 void x11_window_t::show_impl() const
 {
     XMapWindow(m_display_handle, m_handle);
+    
+    // Obtain the width and height of the screen.
+    int32_t width = XDisplayWidth(m_display_handle, DefaultScreen(m_display_handle));
+    int32_t height = XDisplayHeight(m_display_handle, DefaultScreen(m_display_handle));
+    
+    // Move the window to the center of the screen.
+    XMoveWindow(m_display_handle, m_handle, (width - m_width) / 2, (height - m_height) / 2);
 }
 
 void x11_window_t::update_impl()
