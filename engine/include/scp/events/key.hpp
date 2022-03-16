@@ -9,14 +9,18 @@ typedef int32_t;
 #include <scp/event.hpp>
 #include <scp/event-type.hpp>
 
+namespace scp
+{
+    enum class key_t;
+}
+
 namespace scp::events
 {
     // A single key event. Contains all the information required.
     struct SCPEXP key_t: public event_t
     {
-        // We haven't decided on the keycode just yet, so right now they are j-
-        // ust integers.
-        int32_t key_code;
+        // The keycode of the key that was pressed down.
+        scp::key_t key_code;
         
         // What type of key event is it.
         enum class key_type_t

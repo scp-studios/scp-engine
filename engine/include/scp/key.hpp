@@ -6,7 +6,7 @@
 
 namespace scp
 {
-    enum class key
+    enum class key_t
     {
         // First row.
         // ==========
