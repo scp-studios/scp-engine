@@ -28,6 +28,9 @@ namespace scp::platform::linux_n
         // Show the window.
         void show_impl() const override;
         
+        // Change the window in and out of fullscreen.
+        void set_fullscreen_impl(bool value) override;
+        
         // Update the window.
         void update_impl() override;
         
@@ -48,9 +51,12 @@ namespace scp::platform::linux_n
         uint16_t m_width;
         uint16_t m_height;
         
-        // These are for the window closing mechanisms.
+        // X11 window atoms.
         Atom WM_DELETE_WINDOW;
         Atom WM_PROTOCOLS;
+        Atom NET_WM_STATE;
+        Atom NET_WM_STATE_FULLSCREEN;
+        Atom NET_WM_BYPASS_COMPOSITOR;
         
         // Is the window in fullscreen?
         bool m_fullscreen;

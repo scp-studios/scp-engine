@@ -27,6 +27,9 @@ namespace scp
 
 		// Show the window, as it's typically hidden by default.
 		void show() const;
+		
+		// Change the window in and out of fullscreen mode.
+		void set_fullscreen(bool value);
 
 		// Update the window (basic operations such as swap buffers and event polling).
 		void update();
@@ -43,6 +46,7 @@ namespace scp
 		// The implementation functions.
 		virtual bool is_open_impl() const { return false;  }
 		virtual void show_impl() const {}
+		virtual void set_fullscreen_impl(bool value) {}
 		virtual void update_impl() {}
 	};
 }

@@ -18,6 +18,13 @@ x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p
         return;
     }
     
+    // Initialize the atoms that are needed.
+    NET_WM_STATE = XInternAtom(m_display_handle, "_NET_WM_STATE", false);
+    NET_WM_STATE_FULLSCREEN = XInternAtom(m_display_handle, "_NET_WM_STATE_FULLSCREEN", false);
+    NET_WM_BYPASS_COMPOSITOR = XInternAtom(m_display_handle, "_NET_WM_BYPASS_COMPOSITOR", false);
+    WM_DELETE_WINDOW = XInternAtom(m_display_handle, "WM_DELETE_WINDOW", False);
+    WM_PROTOCOLS = XInternAtom(m_display_handle, "WM_PROTOCOLS", False);
+    
     int32_t screen = DefaultScreen(m_display_handle);
     
     m_is_open = true;
@@ -39,23 +46,14 @@ x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p
         return;
     }
     
-    XMapWindow(m_display_handle, m_handle);
-    
     XStoreName(m_display_handle, m_handle, p_title.data());
     
     XSelectInput(m_display_handle, m_handle, KeyPressMask | KeyReleaseMask | ButtonPressMask | ButtonReleaseMask | PointerMotionMask);
-    
-    WM_DELETE_WINDOW = XInternAtom(m_display_handle, "WM_DELETE_WINDOW", False);
-    WM_PROTOCOLS = XInternAtom(m_display_handle, "WM_PROTOCOLS", False);
     
     XSetWMProtocols(m_display_handle, m_handle, &WM_DELETE_WINDOW, 1);
     
     if (p_fullscreen)
     {
-        Atom NET_WM_STATE = XInternAtom(m_display_handle, "_NET_WM_STATE", false);
-        Atom NET_WM_STATE_FULLSCREEN = XInternAtom(m_display_handle, "_NET_WM_STATE_FULLSCREEN", false);
-        Atom NET_WM_BYPASS_COMPOSITOR = XInternAtom(m_display_handle, "_NET_WM_BYPASS_COMPOSITOR", false);
-        
         XEvent* fullscreen_event = new XEvent;
         fullscreen_event->type = ClientMessage;
         fullscreen_event->xclient.window = m_handle;
@@ -81,7 +79,7 @@ bool x11_window_t::is_open_impl() const
 
 void x11_window_t::show_impl() const
 {
-    //XMapWindow(m_display_handle, m_handle);
+    XMapWindow(m_display_handle, m_handle);
     
     // Obtain the width and height of the screen.
     int32_t width = XDisplayWidth(m_display_handle, DefaultScreen(m_display_handle));
@@ -89,6 +87,46 @@ void x11_window_t::show_impl() const
     
     // Move the window to the center of the screen.
     XMoveWindow(m_display_handle, m_handle, (width - m_width) / 2, (height - m_height) / 2);
+}
+
+void x11_window_t::set_fullscreen_impl(bool p_value)
+{
+    if (p_value)
+    {
+        XEvent *fullscreen_event = new XEvent;
+        fullscreen_event->type = ClientMessage;
+        fullscreen_event->xclient.window = m_handle;
+        fullscreen_event->xclient.format = 32;
+        fullscreen_event->xclient.message_type = NET_WM_STATE;
+        fullscreen_event->xclient.data.l[0] = 1;
+        fullscreen_event->xclient.data.l[1] = NET_WM_STATE_FULLSCREEN;
+        
+        XSendEvent(m_display_handle, DefaultRootWindow(m_display_handle), false, ClientMessage, fullscreen_event);
+        
+        // Bypass the compositor so that things like G sync would work.
+        const uint64_t value = 1;
+        XChangeProperty(m_display_handle, m_handle, NET_WM_BYPASS_COMPOSITOR, XA_CARDINAL, 32, PropModeReplace, reinterpret_cast<const unsigned char*>(&value), 1);
+        
+        delete fullscreen_event;
+    }
+    else 
+    {
+        XEvent *fullscreen_event = new XEvent;
+        fullscreen_event->type = ClientMessage;
+        fullscreen_event->xclient.window = m_handle;
+        fullscreen_event->xclient.format = 32;
+        fullscreen_event->xclient.message_type = NET_WM_STATE;
+        fullscreen_event->xclient.data.l[0] = 0;
+        fullscreen_event->xclient.data.l[1] = NET_WM_STATE_FULLSCREEN;
+        
+        XSendEvent(m_display_handle, DefaultRootWindow(m_display_handle), false, ClientMessage, fullscreen_event);
+        
+        // Bypass the compositor so that things like G sync would work.
+        const uint64_t value = 0;
+        XChangeProperty(m_display_handle, m_handle, NET_WM_BYPASS_COMPOSITOR, XA_CARDINAL, 32, PropModeReplace, reinterpret_cast<const unsigned char*>(&value), 1);
+        
+        delete fullscreen_event;
+    }
 }
 
 void x11_window_t::update_impl()

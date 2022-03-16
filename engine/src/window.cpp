@@ -31,6 +31,11 @@ void window_t::show() const
 	return m_implementation->show_impl();
 }
 
+void window_t::set_fullscreen(bool value)
+{
+	m_implementation->set_fullscreen_impl(value);
+}
+
 void window_t::update()
 {
 	return m_implementation->update_impl();
