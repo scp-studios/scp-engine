@@ -52,6 +52,9 @@ namespace scp::platform::linux_n
         Atom WM_DELETE_WINDOW;
         Atom WM_PROTOCOLS;
         
+        // Is the window in fullscreen?
+        bool m_fullscreen;
+        
         // Handle the events.
         void handle_events();
     };

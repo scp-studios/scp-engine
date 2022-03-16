@@ -1,12 +1,14 @@
 #include "../../pch.hpp"
 
 #include <X11/Xlib.h>
+#include <X11/Xatom.h>
 
 #include "x11-window.hpp"
 
 using scp::platform::linux_n::x11_window_t;
 
-x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p_title, bool p_fullscreen): m_width(p_width), m_height(p_height)
+x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p_title, bool p_fullscreen): 
+    m_width(p_width), m_height(p_height), m_fullscreen(p_fullscreen)
 {
     m_display_handle = XOpenDisplay(nullptr);
     if (!m_display_handle)
@@ -37,6 +39,8 @@ x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p
         return;
     }
     
+    XMapWindow(m_display_handle, m_handle);
+    
     XStoreName(m_display_handle, m_handle, p_title.data());
     
     XSelectInput(m_display_handle, m_handle, KeyPressMask | KeyReleaseMask | ButtonPressMask | ButtonReleaseMask | PointerMotionMask);
@@ -45,6 +49,29 @@ x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p
     WM_PROTOCOLS = XInternAtom(m_display_handle, "WM_PROTOCOLS", False);
     
     XSetWMProtocols(m_display_handle, m_handle, &WM_DELETE_WINDOW, 1);
+    
+    if (p_fullscreen)
+    {
+        Atom NET_WM_STATE = XInternAtom(m_display_handle, "_NET_WM_STATE", false);
+        Atom NET_WM_STATE_FULLSCREEN = XInternAtom(m_display_handle, "_NET_WM_STATE_FULLSCREEN", false);
+        Atom NET_WM_BYPASS_COMPOSITOR = XInternAtom(m_display_handle, "_NET_WM_BYPASS_COMPOSITOR", false);
+        
+        XEvent* fullscreen_event = new XEvent;
+        fullscreen_event->type = ClientMessage;
+        fullscreen_event->xclient.window = m_handle;
+        fullscreen_event->xclient.format = 32;
+        fullscreen_event->xclient.message_type = NET_WM_STATE;
+        fullscreen_event->xclient.data.l[0] = 1;
+        fullscreen_event->xclient.data.l[1] = NET_WM_STATE_FULLSCREEN;
+        
+        XSendEvent(m_display_handle, DefaultRootWindow(m_display_handle), false, ClientMessage, fullscreen_event);
+        
+        // Bypass the compositor so that things like G sync would work.
+        const uint64_t value = 1;
+        XChangeProperty(m_display_handle, m_handle, NET_WM_BYPASS_COMPOSITOR, XA_CARDINAL, 32, PropModeReplace, reinterpret_cast<const unsigned char*>(&value), 1);
+        
+        delete fullscreen_event;
+    }
 }
 
 bool x11_window_t::is_open_impl() const 
@@ -54,7 +81,7 @@ bool x11_window_t::is_open_impl() const
 
 void x11_window_t::show_impl() const
 {
-    XMapWindow(m_display_handle, m_handle);
+    //XMapWindow(m_display_handle, m_handle);
     
     // Obtain the width and height of the screen.
     int32_t width = XDisplayWidth(m_display_handle, DefaultScreen(m_display_handle));
