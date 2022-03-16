@@ -17,8 +17,8 @@ namespace scp
     // No comments needed
     struct SCPEXP mouse_button_t: public event_t
     {
-        // We are currently using GLFW mouse codes, but that should change in 
-        // the future.
+        // Mouse codes are just integers for now, since we haven't made a mouse
+        // code system yet.
         int32_t mouse_code;
         
         // Is the mouse button pressed down?
