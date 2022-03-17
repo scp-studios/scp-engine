@@ -1,3 +1,5 @@
+#include "pch.hpp"
+
 #include <scp/window.hpp>
 
 #ifdef SCP_PLATFORM_WINDOWS

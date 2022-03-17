@@ -1,3 +1,5 @@
+#include "pch.hpp"
+
 #include <scp/scene.hpp>
 
 using scp::scene_t;
