@@ -7,6 +7,7 @@
 #include <string>
 #include <string_view>
 #include <functional>
+#include <memory>
 
 #ifdef SCP_PLATFORM_WINDOWS
 #include <Windows.h>
