@@ -11,6 +11,8 @@
 
 namespace scp
 {
+	class event_dispatcher_t;
+	
 	class SCPEXP window_t
 	{
 	public:
@@ -18,7 +20,7 @@ namespace scp
 		window_t() = default;
 
 		// Constructs a window from basic parameters.
-		window_t(int32_t width, int32_t height, std::string_view title, bool fullscreen);
+		window_t(int32_t width, int32_t height, std::string_view title, event_dispatcher_t& event_dispatcher, bool fullscreen);
 
 		// Removed the copy constructor and assignment operators to prevent pr-
 		// oblems in the future.

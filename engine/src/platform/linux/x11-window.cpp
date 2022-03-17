@@ -2,13 +2,14 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#include <scp/event-dispatcher.hpp>
 
 #include "x11-window.hpp"
 
 using scp::platform::linux_n::x11_window_t;
 
-x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p_title, bool p_fullscreen): 
-    m_width(p_width), m_height(p_height), m_fullscreen(p_fullscreen)
+x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p_title, event_dispatcher_t& p_event_dispatcher, bool p_fullscreen): 
+    m_width(p_width), m_height(p_height), m_fullscreen(p_fullscreen), m_event_dispatcher(p_event_dispatcher)
 {
     m_display_handle = XOpenDisplay(nullptr);
     if (!m_display_handle)
@@ -136,7 +137,7 @@ void x11_window_t::update_impl()
 
 void x11_window_t::handle_events()
 {
-    while (XPending(m_display_handle) > 0)
+    if (XPending(m_display_handle) > 0)
     {
         XEvent event;
         XNextEvent(m_display_handle, &event);

@@ -1,5 +1,7 @@
 #include "pch.hpp"
 
+#include <scp/event-dispatcher.hpp>
+
 #include <scp/window.hpp>
 
 #ifdef SCP_PLATFORM_WINDOWS
@@ -12,13 +14,13 @@
 
 using scp::window_t;
 
-window_t::window_t(int32_t width, int32_t height, std::string_view title, bool fullscreen)
+window_t::window_t(int32_t width, int32_t height, std::string_view title, event_dispatcher_t& event_dispatcher, bool fullscreen)
 {
 #ifdef SCP_PLATFORM_WINDOWS
-	m_implementation = new platform::windows::window_t(width, height, title, fullscreen);
+	m_implementation = new platform::windows::window_t(width, height, title, event_dispatcher, fullscreen);
 #else
 	#ifdef SCP_PLATFORM_LINUX
-		m_implementation = std::make_unique<scp::platform::linux_n::x11_window_t>(width, height, title, fullscreen);
+		m_implementation = std::make_unique<scp::platform::linux_n::x11_window_t>(width, height, title, event_dispatcher, fullscreen);
 	#endif
 #endif
 }

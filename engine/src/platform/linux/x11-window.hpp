@@ -15,7 +15,7 @@ namespace scp::platform::linux_n
     class x11_window_t: public scp::window_t
     {
     public:
-        x11_window_t(int32_t width, int32_t height, std::string_view title, bool fullscreen);
+        x11_window_t(int32_t width, int32_t height, std::string_view title, event_dispatcher_t& event_dispatcher, bool fullscreen);
         
         // Removed the copy constructor and assignment operators to prevent pr-
         // oblems in the future.
@@ -51,12 +51,17 @@ namespace scp::platform::linux_n
         uint16_t m_width;
         uint16_t m_height;
         
-        // X11 window atoms.
+        // X11 window atoms. They technically don't change throughout the prog-
+        // ram, but they can't be const because I have to past a non-const poi-
+        // nter to X11 at some point.
         Atom WM_DELETE_WINDOW;
         Atom WM_PROTOCOLS;
         Atom NET_WM_STATE;
         Atom NET_WM_STATE_FULLSCREEN;
         Atom NET_WM_BYPASS_COMPOSITOR;
+        
+        // The event dispatcher to dispatch events to.
+        event_dispatcher_t& m_event_dispatcher;
         
         // Is the window in fullscreen?
         bool m_fullscreen;
