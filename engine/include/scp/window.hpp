@@ -4,12 +4,14 @@
 // nted by the system specific classes. It's job is to create a simple window 
 // and that's kind of it. It also has basic functions to managing a window.
 
+#include <scp/scp.hpp>
+
 #include <string_view>
 #include <memory>
 
 namespace scp
 {
-	class window_t
+	class SCPEXP window_t
 	{
 	public:
 		// Default constructor that does nothing.
