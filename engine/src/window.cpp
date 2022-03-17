@@ -16,7 +16,7 @@ window_t::window_t(int32_t width, int32_t height, std::string_view title, bool f
 	m_implementation = new platform::windows::window_t(width, height, title, fullscreen);
 #else
 	#ifdef SCP_PLATFORM_LINUX
-		m_implementation = new scp::platform::linux_n::x11_window_t(width, height, title, fullscreen);
+		m_implementation = std::make_unique<scp::platform::linux_n::x11_window_t>(width, height, title, fullscreen);
 	#endif
 #endif
 }
@@ -41,9 +41,9 @@ void window_t::update()
 	return m_implementation->update_impl();
 }
 
-window_t* window_t::get_implementation() const
+window_t& window_t::get_implementation() const
 {
-	return m_implementation;
+	return *m_implementation;
 }
 
 window_t::~window_t()

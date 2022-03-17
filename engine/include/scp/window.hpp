@@ -5,6 +5,7 @@
 // and that's kind of it. It also has basic functions to managing a window.
 
 #include <string_view>
+#include <memory>
 
 namespace scp
 {
@@ -35,13 +36,13 @@ namespace scp
 		void update();
 
 		// Returns the backend handle of the window.
-		window_t* get_implementation() const;
+		window_t& get_implementation() const;
 
 		// No comments needed here.
 		virtual ~window_t();
 	private:
 		// The actual window object with the implementations.
-		window_t* m_implementation;
+		std::unique_ptr<window_t> m_implementation;
 
 		// The implementation functions.
 		virtual bool is_open_impl() const { return false;  }
