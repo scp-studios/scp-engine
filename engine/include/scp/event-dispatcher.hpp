@@ -14,11 +14,11 @@ namespace scp
     
     // A simple event dispatcher for dispatching events. It abstracts the deta-
     // ils of dispatching events away.
-    class SCPEXP event_dispatcher
+    class SCPEXP event_dispatcher_t
     {
     public:
         // Constructor.
-        event_dispatcher(event_handler_t handler): m_handler(handler) {}
+        event_dispatcher_t(event_handler_t handler): m_handler(handler) {}
         
         // Dispatch an event.
         void dispatch(const event_t& event) const { m_handler(event); }
