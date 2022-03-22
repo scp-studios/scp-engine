@@ -12,6 +12,8 @@ typedef struct _XDisplay Display;
 
 namespace scp::platform::linux_n
 {
+    class x11_keymap_t;
+    
     class x11_window_t: public scp::window_t
     {
     public:
@@ -59,6 +61,9 @@ namespace scp::platform::linux_n
         Atom NET_WM_STATE;
         Atom NET_WM_STATE_FULLSCREEN;
         Atom NET_WM_BYPASS_COMPOSITOR;
+        
+        // The keymap for event handling.
+        x11_keymap_t& m_keymap;
         
         // The event dispatcher to dispatch events to.
         event_dispatcher_t& m_event_dispatcher;

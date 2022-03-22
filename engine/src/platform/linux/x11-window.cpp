@@ -4,13 +4,16 @@
 #include <X11/Xatom.h>
 #include <scp/event-dispatcher.hpp>
 #include <scp/key.hpp>
+#include <scp/events/key.hpp>
+
+#include "x11-keymap.hpp"
 
 #include "x11-window.hpp"
 
 using scp::platform::linux_n::x11_window_t;
 
 x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p_title, event_dispatcher_t& p_event_dispatcher, bool p_fullscreen): 
-    m_width(p_width), m_height(p_height), m_fullscreen(p_fullscreen), m_event_dispatcher(p_event_dispatcher)
+    m_width(p_width), m_height(p_height), m_fullscreen(p_fullscreen), m_keymap(x11_keymap_t::get_instance()), m_event_dispatcher(p_event_dispatcher)
 {
     m_display_handle = XOpenDisplay(nullptr);
     if (!m_display_handle)
@@ -152,6 +155,27 @@ void x11_window_t::handle_events()
                 m_is_open = false;
                 break;
             }
+        case MappingNotify:
+            XRefreshKeyboardMapping(&event.xmapping);
+            break;
+        case KeyPress:
+            {
+                events::key_t out_event = {};
+                out_event.key_code = m_keymap.get_key_enum(XLookupKeysym(&event.xkey, 0));
+                out_event.type = events::key_t::key_type_t::PRESS;
+                
+                m_event_dispatcher.dispatch(out_event);
+            }
+            break;
+        case KeyRelease:
+            {
+                events::key_t out_event = {};
+                out_event.key_code = m_keymap.get_key_enum(XLookupKeysym(&event.xkey, 0));
+                out_event.type = events::key_t::key_type_t::RELEASE;
+                
+                m_event_dispatcher.dispatch(out_event);
+            }
+            break;
         }
     }
 }
