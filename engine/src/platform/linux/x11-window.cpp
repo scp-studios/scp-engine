@@ -3,6 +3,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <scp/event-dispatcher.hpp>
+#include <scp/key.hpp>
 
 #include "x11-window.hpp"
 
