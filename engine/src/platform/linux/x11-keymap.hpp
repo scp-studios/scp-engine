@@ -1,21 +1,14 @@
 #ifndef BED65B2C_50ED_40D6_BAAB_58756049B956
 #define BED65B2C_50ED_40D6_BAAB_58756049B956
 
+#include <unordered_map>
+
 namespace scp
 {
     enum class key_t;
 }
 
-namespace std
-{
-    template<typename T, typename T2> class pair;
-    template<typename T> class allocator;
-    template<typename T> struct hash;
-    template<typename T> struct equal_to;
-    template<typename T, typename T2, typename T3 = hash<T>, typename T4 = equal_to<T>, typename T5 = allocator<pair<T, T2>>> class unordered_map;
-}
-
-namespace scp::platform::linux
+namespace scp::platform::linux_n
 {
     // A singleton class for keymapping between my key enums to X11 keycodes
     class x11_keymap_t
