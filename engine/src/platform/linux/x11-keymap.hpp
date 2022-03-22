@@ -15,7 +15,7 @@ namespace scp::platform::linux_n
     {
     public:
         // Get the instance.
-        x11_keymap_t& get_instance() const;
+        static x11_keymap_t& get_instance();
         
         // Begone!
         x11_keymap_t(x11_keymap_t&) = delete;
