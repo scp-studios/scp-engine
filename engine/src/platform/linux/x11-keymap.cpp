@@ -8,10 +8,10 @@
 
 #include "x11-keymap.hpp"
 
-using scp::platform::linux::x11_keymap_t;
+using scp::platform::linux_n::x11_keymap_t;
 
-#define INSERT_KEY_S(a, b) m_keymap.insert({ XK_##a, scp::key_t::##b })
-#define INSERT_KEY(x) INSERT_KEY_S(x, x)
+#define INSERT_KEY_S(a, b) m_keymap.insert({ XK_##a, scp::key_t::b })
+#define INSERT_KEY(x) m_keymap.insert({ XK_##x, scp::key_t::x })
 
 x11_keymap_t& x11_keymap_t::get_instance() const
 {
