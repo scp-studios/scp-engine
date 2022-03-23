@@ -13,7 +13,7 @@
 
 typedef int32_t;
 
-namespace scp
+namespace scp::events
 {
     // No comments needed
     struct SCPEXP mouse_button_t: public event_t
