@@ -5,6 +5,7 @@
 #include <scp/event-dispatcher.hpp>
 #include <scp/key.hpp>
 #include <scp/events/key.hpp>
+#include <scp/events/mouse.hpp>
 
 #include "x11-keymap.hpp"
 
@@ -139,6 +140,23 @@ void x11_window_t::update_impl()
     handle_events();
 }
 
+static inline scp::mouse_button_t translate_button_code(uint32_t p_og)
+{
+    switch (p_og)
+    {
+        case Button1:
+            return scp::mouse_button_t::LEFT;
+        case Button2:
+            return scp::mouse_button_t::MIDDLE;
+        case Button3:
+            return scp::mouse_button_t::RIGHT;
+        default:
+            // Assume that the left mouse is clicked if the button number isn't
+            // known.
+            return scp::mouse_button_t::LEFT;
+    }
+}
+
 void x11_window_t::handle_events()
 {
     if (XPending(m_display_handle) > 0)
@@ -176,6 +194,23 @@ void x11_window_t::handle_events()
                 m_event_dispatcher.dispatch(out_event);
             }
             break;
+        case ButtonPress:
+            {
+                events::mouse_button_t out_event = {};
+                out_event.mouse_code = translate_button_code(event.xbutton.button);
+                out_event.is_button_down = true;
+                
+                m_event_dispatcher.dispatch(out_event);
+            }
+            break;
+        case ButtonRelease:
+            {
+                events::mouse_button_t out_event = {};
+                out_event.mouse_code = translate_button_code(event.xbutton.button);
+                out_event.is_button_down = false;
+                
+                m_event_dispatcher.dispatch(out_event);
+            }
         }
     }
 }
