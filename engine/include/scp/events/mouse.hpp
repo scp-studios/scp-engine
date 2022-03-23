@@ -9,6 +9,7 @@
 #include <scp/scp.hpp>
 #include <scp/event.hpp>
 #include <scp/event-type.hpp>
+#include <scp/mouse-button.hpp>
 
 typedef int32_t;
 
@@ -17,9 +18,8 @@ namespace scp
     // No comments needed
     struct SCPEXP mouse_button_t: public event_t
     {
-        // Mouse codes are just integers for now, since we haven't made a mouse
-        // code system yet.
-        int32_t mouse_code;
+        // The mouse code
+        scp::mouse_button_t mouse_code;
         
         // Is the mouse button pressed down?
         bool is_button_down;

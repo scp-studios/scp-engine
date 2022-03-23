@@ -8,6 +8,7 @@ target_sources(
     game-launcher.hpp
     key.hpp
     launch-configuration.hpp
+    mouse-button.hpp
     scene.hpp
     scp.hpp
     window.hpp
