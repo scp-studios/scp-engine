@@ -13,6 +13,9 @@
 
 using scp::platform::linux_n::x11_window_t;
 
+const uint8_t Button6 = 6;
+const uint8_t Button7 = 7;
+
 x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p_title, event_dispatcher_t& p_event_dispatcher, bool p_fullscreen): 
     m_width(p_width), m_height(p_height), m_fullscreen(p_fullscreen), m_keymap(x11_keymap_t::get_instance()), m_event_dispatcher(p_event_dispatcher)
 {
@@ -196,11 +199,41 @@ void x11_window_t::handle_events()
             break;
         case ButtonPress:
             {
-                events::mouse_button_t out_event = {};
-                out_event.mouse_code = translate_button_code(event.xbutton.button);
-                out_event.is_button_down = true;
-                
-                m_event_dispatcher.dispatch(out_event);
+                if (event.xbutton.button > Button3)
+                {
+                    double scroll_x = 0.0;
+                    double scroll_y = 0.0;
+                    
+                    switch (event.xbutton.button)
+                    {
+                        case Button4:
+                            scroll_y = 1.0;
+                            break;
+                        case Button5:
+                            scroll_y = -1.0;
+                            break;
+                        case Button6:
+                            scroll_x = 1.0;
+                            break;
+                        case Button7:
+                            scroll_x = -1.0;
+                            break;
+                    }
+                    
+                    events::scroll_t out_event = {};
+                    out_event.x = scroll_x;
+                    out_event.y = scroll_y;
+                    
+                    m_event_dispatcher.dispatch(out_event);
+                }
+                else 
+                {
+                    events::mouse_button_t out_event = {};
+                    out_event.mouse_code = translate_button_code(event.xbutton.button);
+                    out_event.is_button_down = false;
+                    
+                    m_event_dispatcher.dispatch(out_event);
+                }
             }
             break;
         case ButtonRelease:
@@ -208,6 +241,14 @@ void x11_window_t::handle_events()
                 events::mouse_button_t out_event = {};
                 out_event.mouse_code = translate_button_code(event.xbutton.button);
                 out_event.is_button_down = false;
+                
+                m_event_dispatcher.dispatch(out_event);
+            }
+        case MotionNotify:
+            {
+                events::mouse_position out_event = {};
+                out_event.x = event.xmotion.x;
+                out_event.y = event.xmotion.y;
                 
                 m_event_dispatcher.dispatch(out_event);
             }
