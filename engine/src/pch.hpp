@@ -9,6 +9,8 @@
 #include <functional>
 #include <memory>
 
+#include <cstdint>
+
 #ifdef SCP_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif
