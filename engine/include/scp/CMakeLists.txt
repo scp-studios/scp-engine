@@ -9,6 +9,7 @@ target_sources(
     key.hpp
     launch-configuration.hpp
     layer.hpp
+    layer-stack.hpp
     mouse-button.hpp
     scene.hpp
     scp.hpp
