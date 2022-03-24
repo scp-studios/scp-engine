@@ -7,6 +7,9 @@
 #include <scp/event.hpp>
 #include <scp/events/key.hpp>
 #include <scp/key.hpp>
+#include <scp/mouse-button.hpp>
+
+#include <scp/events/mouse.hpp>
 #include <iostream>
 #include <cstdlib>
 
@@ -33,7 +36,37 @@ static void handle_event(const scp::event_t& event)
             case scp::key_t::D:
                 std::clog << "D";
                 break;
+            case scp::key_t::ENTER:
+                std::clog << "\n";
+                break;
+            case scp::key_t::BACKSPACE:
+                std::clog << "\b \b";
+                break;
         }
+    }
+    else 
+    if (event.get_type() == scp::event_type_t::MOUSE_BUTTON)
+    {
+        auto mouse_button_event = static_cast<const scp::events::mouse_button_t&>(event);
+        
+        if (mouse_button_event.mouse_code == scp::mouse_button_t::LEFT)
+        {
+            std::cout << " The left mouse has been clicked!\n";
+        }
+    }
+    else 
+    if (event.get_type() == scp::event_type_t::MOUSE_POSITION)
+    {
+        auto mouse_pos_event = static_cast<const scp::events::mouse_position&>(event);
+        
+        std::cout << " The mouse is now at (" << mouse_pos_event.x << ", " << mouse_pos_event.y << ")!\n";
+    }
+    else 
+    if (event.get_type() == scp::event_type_t::SCROLL)
+    {
+        auto scroll_event = static_cast<const scp::events::scroll_t&>(event);
+        
+        std::cout << " We have scrolled by " << scroll_event.y << std::endl;
     }
 }
 
