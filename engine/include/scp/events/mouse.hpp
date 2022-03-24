@@ -11,7 +11,7 @@
 #include <scp/event-type.hpp>
 #include <scp/mouse-button.hpp>
 
-typedef int32_t;
+#include <cstdint>
 
 namespace scp::events
 {

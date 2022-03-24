@@ -3,7 +3,7 @@
 
 #include <scp/scp.hpp>
 
-typedef uint32_t;
+#include <cstdint>
 
 namespace scp
 {

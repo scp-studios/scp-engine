@@ -1,7 +1,7 @@
 #ifndef F6F1ECD5_2AD0_48D4_A336_1734A4EB8215
 #define F6F1ECD5_2AD0_48D4_A336_1734A4EB8215
 
-typedef int32_t;
+#include <cstdint>
 
 // We have to include the event header because we are inhereting from the event
 // class
