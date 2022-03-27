@@ -7,6 +7,8 @@
 
 #include <scp/scp.hpp>
 
+#include <scp/layer-stack.hpp>
+
 namespace scp
 {
 	class event_t;
@@ -51,5 +53,8 @@ namespace scp
 
 		// The currently active scene.
 		static scene_t* active_scene;
+		
+		// The layer stack that contains all of the layers.
+		layer_stack_t m_layer_stack;
 	};
 }
