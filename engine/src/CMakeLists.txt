@@ -2,6 +2,7 @@ target_sources(
     scp-engine PRIVATE
     
     game-launcher.cpp
+    layer-stack.cpp
     scene.cpp
     window.cpp
     pch.hpp
