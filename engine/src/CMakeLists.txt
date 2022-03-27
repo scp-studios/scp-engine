@@ -3,6 +3,7 @@ target_sources(
     
     game-launcher.cpp
     layer-stack.cpp
+    pch.hpp
     scene.cpp
     window.cpp
     pch.hpp
