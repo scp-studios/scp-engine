@@ -8,6 +8,7 @@
 #include <scp/events/key.hpp>
 #include <scp/key.hpp>
 #include <scp/mouse-button.hpp>
+#include <scp/scene.hpp>
 
 #include <scp/events/mouse.hpp>
 #include <iostream>
@@ -71,11 +72,13 @@ static void handle_event(const scp::event_t& event)
 }
 
 // Runs the game with the main loop and all that stuff.
-static void run()
+static void run(const scp::launch_configuration_t& p_launch_configuration)
 {
     scp::event_dispatcher_t event_dispatcher(handle_event);
     
     scp::window_t window(1280, 720, "SCP Engine Sandbox", event_dispatcher, false);
+    
+    scp::scene_t::set_active(&p_launch_configuration.start_scene);
 
     window.show();
     while (window.is_open())
@@ -103,7 +106,7 @@ int scp::game_launcher::launch_game(const scp::launch_configuration_t& p_launch_
     // The launch game functions handles all fatal errors
     try
     {
-        run();
+        run(p_launch_configuration);
     }
     catch(const fatal_error_t& e)
     {

@@ -3,11 +3,13 @@
 
 namespace scp
 {
-    // A set of parameters for the game launcher as to how to run the game. It
-    // is empty for now because I haven't added any options yet.
+    class scene_t;
+    
+    // A set of parameters for the game launcher as to how to run the game. 
     struct launch_configuration_t
     {
-        // Empty for now.
+        // The starting scene.
+        scene_t& start_scene;
     };
 }
 

@@ -9,6 +9,8 @@
 
 namespace scp
 {
+	class event_t;
+	
 	class SCPEXP scene_t
 	{
 	public:
@@ -23,6 +25,9 @@ namespace scp
 
 		// Update the active scene.
 		static void update_active(double delta_time);
+		
+		// Pass an event to the active scene.
+		static void send_event_to_active(const event_t& event);
 
 		// Render the active scene.
 		static void render_active();
@@ -30,9 +35,15 @@ namespace scp
 		// Destructor. No explanations needed
 		virtual ~scene_t();
 	private:
+		// Called when the scene is set to the active scene.
+		void on_active();
+		
 		// Updates the scene. Private because you don't update a scene that is
 		// not active.
 		void update(double delta_time);
+		
+		// Handle events.
+		void handle_event(const event_t& event);
 
 		// Renders the scene. Private because you don't render a scene that is 
 		// not active.
