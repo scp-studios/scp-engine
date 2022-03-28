@@ -23,6 +23,8 @@ static void run(const scp::launch_configuration_t& p_launch_configuration)
 {
     scp::engine_t engine(p_launch_configuration);
     
+    engine.show_window();
+    
     while (engine.is_running())
     {
         engine.update();
