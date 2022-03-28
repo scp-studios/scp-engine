@@ -3,6 +3,7 @@
 #include <scp/event.hpp>
 #include <scp/events/key.hpp>
 #include <scp/events/mouse.hpp>
+#include "dummy-layer.hpp"
 
 #include <scp/scene.hpp>
 
@@ -10,7 +11,7 @@ using scp::scene_t;
 
 scene_t::scene_t()
 {
-	// Placeholder
+	m_layer_stack.push_layer<dummy_layer_t>();
 }
 
 void scene_t::set_active(scene_t* p_new_active)
