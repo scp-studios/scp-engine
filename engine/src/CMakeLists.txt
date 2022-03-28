@@ -1,6 +1,7 @@
 target_sources(
     scp-engine PRIVATE
     
+    dummy-layer.hpp
     engine.cpp
     engine.hpp
     game-launcher.cpp
