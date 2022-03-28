@@ -3,6 +3,7 @@
 
 #include <scp/scp.hpp>
 #include <vector>
+#include <memory>
 
 // A simple, multipurposed layer stack. It's for the layer system. It's very s-
 // imple for now.
@@ -23,7 +24,10 @@ namespace scp
         layer_stack_t() = default;
         
         // Push a new layer onto the stack.
-        void push_layer(layer_t* layer);
+        template<typename tp_layer_type, typename... tp_create_args> void push_layer(tp_create_args... p_create_args)
+        {
+            m_layer_stack.push_back(std::make_unique<tp_layer_type>(p_create_args));
+        }
         
         // Pop the last layer off the stack.
         void pop_back();
@@ -39,7 +43,7 @@ namespace scp
         
     private:
         // The actual vector to hold the layers.
-        std::vector<layer_t*> m_layer_stack;
+        std::vector<std::unique_ptr<layer_t>> m_layer_stack;
     };
 }
 
