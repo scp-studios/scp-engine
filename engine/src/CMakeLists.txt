@@ -1,6 +1,7 @@
 target_sources(
     scp-engine PRIVATE
     
+    engine.cpp
     engine.hpp
     game-launcher.cpp
     layer-stack.cpp
