@@ -27,16 +27,16 @@ void layer_stack_t::on_event(const event_t& event)
 
 void layer_stack_t::update(double p_delta_time)
 {
-    for (auto layer: m_layer_stack)
+    for (std::vector<layer_t*>::iterator i = m_layer_stack.begin(); i != m_layer_stack.end(); i++)
     {
-        layer->update(p_delta_time);
+        (*i)->update(p_delta_time);
     }
 }
 
 void layer_stack_t::render()
 {
-    for (auto layer: m_layer_stack)
+    for (std::vector<layer_t*>::iterator i = m_layer_stack.begin(); i != m_layer_stack.end(); i++)
     {
-        layer->render();
+        (*i)->render();
     }
 }
