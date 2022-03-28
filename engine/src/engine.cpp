@@ -35,3 +35,8 @@ bool engine_t::is_running()
 {
     return m_window.is_open();
 }
+
+engine_t::~engine_t()
+{
+    
+}
