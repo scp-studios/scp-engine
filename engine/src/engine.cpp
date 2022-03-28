@@ -2,6 +2,7 @@
 
 #include <scp/scene.hpp>
 #include <scp/event.hpp>
+#include <scp/launch-configuration.hpp>
 
 #include "engine.hpp"
 
@@ -21,7 +22,7 @@ engine_t::engine_t(const launch_configuration_t& p_launch_configuration):
     // ter.
     m_window(1280, 720, "SCP Engine Window", m_event_dispatcher, false)
 {
-    
+    scp::scene_t::set_active(&(p_launch_configuration.start_scene));
 }
 
 void engine_t::update()
@@ -31,9 +32,14 @@ void engine_t::update()
     m_window.update();
 }
 
-bool engine_t::is_running()
+bool engine_t::is_running() const
 {
     return m_window.is_open();
+}
+
+void engine_t::show_window() const
+{
+    m_window.show();
 }
 
 engine_t::~engine_t()
