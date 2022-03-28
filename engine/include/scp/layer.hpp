@@ -33,7 +33,7 @@ namespace scp
         virtual void on_event(const event_t& event) { SCP_UNUSED_ARG(event); }
         
         // Destroy the layer.
-        virtual ~layer_t();
+        virtual ~layer_t() {};
     };
 }
 
