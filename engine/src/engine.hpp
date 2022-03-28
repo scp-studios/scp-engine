@@ -21,7 +21,10 @@ namespace scp
         void update();
         
         // Is the game still running?
-        bool is_running();
+        bool is_running() const;
+        
+        // Show the window.
+        void show_window() const;
         
         ~engine_t();
         
