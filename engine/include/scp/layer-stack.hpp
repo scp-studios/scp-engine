@@ -26,7 +26,7 @@ namespace scp
         // Push a new layer onto the stack.
         template<typename tp_layer_type, typename... tp_create_args> void push_layer(tp_create_args... p_create_args)
         {
-            m_layer_stack.push_back(std::make_unique<tp_layer_type>(p_create_args));
+            m_layer_stack.push_back(std::make_unique<tp_layer_type>(p_create_args...));
         }
         
         // Pop the last layer off the stack.
