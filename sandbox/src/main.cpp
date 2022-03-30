@@ -39,5 +39,5 @@ int main()
         *starting_scene
     };
     
-    scp::game_launcher::launch_game(launch_configuration);
+    return scp::game_launcher::launch_game(launch_configuration);
 }
