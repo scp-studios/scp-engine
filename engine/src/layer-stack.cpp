@@ -14,7 +14,7 @@ void layer_stack_t::pop_back()
 
 void layer_stack_t::on_event(const event_t& event)
 {
-    for (std::vector<std::unique_ptr<layer_t>>::iterator i = m_layer_stack.end(); i != m_layer_stack.begin(); i--)
+    for (std::vector<std::unique_ptr<layer_t>>::iterator i = m_layer_stack.end() - 1; i != m_layer_stack.begin(); i--)
     {
         (*i)->on_event(event);
     }
