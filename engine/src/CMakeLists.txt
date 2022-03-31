@@ -7,6 +7,8 @@ target_sources(
     game-launcher.cpp
     layer-stack.cpp
     pch.hpp
+    scene-layer.cpp
+    scene-layer.hpp
     scene.cpp
     window.cpp
     pch.hpp
