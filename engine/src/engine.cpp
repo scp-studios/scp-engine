@@ -17,10 +17,14 @@ static void handle_events(const scp::event_t& p_event)
     
 }
 
-engine_t& engine_t::get_instance(const launch_configuration_t& launch_configuration)
+void engine_t::init(const launch_configuration_t& p_launch_configuration)
 {
-    static engine_t instance(launch_configuration);
-    return instance;
+    instance = new engine_t(p_launch_configuration);
+}
+
+engine_t& engine_t::get_instance()
+{
+    return *instance;
 }
 
 engine_t::engine_t(const launch_configuration_t& p_launch_configuration):

@@ -16,7 +16,11 @@ namespace scp
     class engine_t
     {
     public:
-        static engine_t& get_instance(const launch_configuration_t& launch_configuration);
+        // Initialize (call the constructor of) the engine class.
+        static void init(const launch_configuration_t& launch_configuration);
+        
+        // Obtain the instance of the engine class.
+        static engine_t& get_instance();
         
         void update();
         
@@ -38,6 +42,9 @@ namespace scp
         
         // The function for handling events.
         void handle_events(const event_t& event);
+        
+        // The instance of the engine.
+        static engine_t* instance;
         
         // The event dispatcher (for recieving events from the window)
         event_dispatcher_t m_event_dispatcher;
