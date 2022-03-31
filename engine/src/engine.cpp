@@ -12,11 +12,6 @@
 
 using scp::engine_t;
 
-static void handle_events(const scp::event_t& p_event)
-{
-    
-}
-
 void engine_t::init(const launch_configuration_t& p_launch_configuration)
 {
     instance = new engine_t(p_launch_configuration);
@@ -25,15 +20,6 @@ void engine_t::init(const launch_configuration_t& p_launch_configuration)
 engine_t& engine_t::get_instance()
 {
     return *instance;
-}
-
-engine_t::engine_t(const launch_configuration_t& p_launch_configuration):
-    m_event_dispatcher(::handle_events),
-    // The dimensions are hard-coded for now, but I will make them flexible la-
-    // ter.
-    m_window(1280, 720, "SCP Engine Window", m_event_dispatcher, false)
-{
-    m_global_layer_stack.push_layer<scene_layer_t>();
 }
 
 void engine_t::update()
@@ -58,4 +44,18 @@ void engine_t::show_window() const
 engine_t::~engine_t()
 {
     
+}
+
+engine_t::engine_t(const launch_configuration_t& p_launch_configuration):
+    m_event_dispatcher(handle_event),
+    // The dimensions are hard-coded for now, but I will make them flexible la-
+    // ter.
+    m_window(1280, 720, "SCP Engine Window", m_event_dispatcher, false)
+{
+    m_global_layer_stack.push_layer<scene_layer_t>();
+}
+
+void engine_t::handle_event(const event_t& p_event)
+{
+    instance->m_global_layer_stack.on_event(p_event);
 }

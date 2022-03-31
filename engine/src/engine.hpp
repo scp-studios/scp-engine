@@ -41,7 +41,7 @@ namespace scp
         engine_t& operator=(engine_t&) = delete;
         
         // The function for handling events.
-        void handle_events(const event_t& event);
+        static void handle_event(const event_t& event);
         
         // The instance of the engine.
         static engine_t* instance;
