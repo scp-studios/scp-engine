@@ -29,6 +29,9 @@ namespace scp
         ~engine_t();
         
     private:
+        // The function for handling events.
+        void handle_events(const event_t& event);
+        
         // The event dispatcher (for recieving events from the window)
         event_dispatcher_t m_event_dispatcher;
         
