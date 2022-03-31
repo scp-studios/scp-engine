@@ -6,6 +6,11 @@
 
 using scp::scene_layer_t;
 
+scene_layer_t::scene_layer_t(scene_t* p_start_scene)
+{
+    scene_t::set_active(p_start_scene);
+}
+
 void scene_layer_t::update(double p_delta_time)
 {
     scene_t::update_active(p_delta_time);

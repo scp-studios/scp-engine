@@ -52,10 +52,12 @@ engine_t::engine_t(const launch_configuration_t& p_launch_configuration):
     // ter.
     m_window(1280, 720, "SCP Engine Window", m_event_dispatcher, false)
 {
-    m_global_layer_stack.push_layer<scene_layer_t>();
+    m_global_layer_stack.push_layer<scene_layer_t>(&(p_launch_configuration.start_scene));
 }
 
 void engine_t::handle_event(const event_t& p_event)
 {
     instance->m_global_layer_stack.on_event(p_event);
 }
+
+engine_t* engine_t::instance = nullptr;

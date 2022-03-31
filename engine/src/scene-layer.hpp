@@ -12,7 +12,7 @@ namespace scp
     class scene_layer_t: public layer_t
     {
     public:
-        scene_layer_t() = default;
+        scene_layer_t(scene_t* start_scene);
         
         void update(double delta_time) override;
         
