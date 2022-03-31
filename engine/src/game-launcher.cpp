@@ -21,7 +21,7 @@
 // Runs the game with the main loop and all that stuff.
 static void run(const scp::launch_configuration_t& p_launch_configuration)
 {
-    scp::engine_t engine(p_launch_configuration);
+    scp::engine_t& engine = scp::engine_t::get_instance(p_launch_configuration);
     
     engine.show_window();
     
