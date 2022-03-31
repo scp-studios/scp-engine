@@ -16,7 +16,7 @@ namespace scp
     class engine_t
     {
     public:
-        engine_t(const launch_configuration_t& launch_configuration);
+        static engine_t& get_instance(const launch_configuration_t& launch_configuration);
         
         void update();
         
@@ -29,6 +29,13 @@ namespace scp
         ~engine_t();
         
     private:
+        // Private constructor.
+        engine_t(const launch_configuration_t& launch_configuration);
+        
+        // Deleting the copy constructor and assignment operator
+        engine_t(engine_t&) = delete;
+        engine_t& operator=(engine_t&) = delete;
+        
         // The function for handling events.
         void handle_events(const event_t& event);
         
