@@ -27,10 +27,9 @@ namespace scp
         // optional).
         virtual void render() {}
         
-        // Handle events. The return value is whether the event was handled or 
-        // not. Some layers may choose to not handle any events, so it is curr-
-        // ently optional.
-        virtual bool on_event(const event_t& event) { SCP_UNUSED_ARG(event); return false; }
+        // Handle events. The return value is whether the event should propaga-
+        // te further throughout the layer stack.
+        virtual bool on_event(const event_t& event) { SCP_UNUSED_ARG(event); return true; }
         
         // Destroy the layer.
         virtual ~layer_t() {};
