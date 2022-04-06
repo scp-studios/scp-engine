@@ -5,7 +5,7 @@
 #include "key.hpp"
 #include "mouse-button.hpp"
 #include <stdint.h>
-#include <array>
+#include <unordered_map>
 
 namespace scp
 {
@@ -19,7 +19,7 @@ namespace scp
         friend class input_layer_t;
         
         // Constructor. Takes no parameters.
-        input_t();
+        input_t() = default;
         
         // Is the key specified pressed down?
         bool is_key_down(key_t key_code) const;
@@ -41,10 +41,10 @@ namespace scp
         
     private:
         // The statuses of all the keys.
-        std::array<bool, 101> m_keys;
+        std::unordered_map<key_t, bool> m_keys;
         
         // The status of all the mouse buttons.
-        std::array<bool, 3> m_mouse_buttons;
+        std::unordered_map<mouse_button_t, bool> m_mouse_buttons;
         
         // Mouse positon.
         uint32_t m_mouse_x;
