@@ -1,3 +1,5 @@
+#include "pch.hpp"
+
 #include <scp/input.hpp>
 
 using scp::input_t;
