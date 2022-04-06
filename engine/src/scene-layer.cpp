@@ -21,9 +21,10 @@ void scene_layer_t::render()
     scene_t::render_active();
 }
 
-void scene_layer_t::on_event(const event_t& p_event)
+bool scene_layer_t::on_event(const event_t& p_event)
 {
     scene_t::send_event_to_active(p_event);
+    return true;
 }
 
 scene_layer_t::~scene_layer_t()

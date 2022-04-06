@@ -18,7 +18,7 @@ namespace scp
         
         void render() override;
         
-        void on_event(const event_t& event) override;
+        bool on_event(const event_t& event) override;
         
         ~scene_layer_t();
     };
