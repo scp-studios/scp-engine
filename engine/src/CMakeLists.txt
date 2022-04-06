@@ -5,6 +5,7 @@ target_sources(
     engine.cpp
     engine.hpp
     game-launcher.cpp
+    input.cpp
     layer-stack.cpp
     pch.hpp
     scene-layer.cpp
