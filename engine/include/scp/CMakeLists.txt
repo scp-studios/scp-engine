@@ -6,6 +6,7 @@ target_sources(
     event.hpp
     fatal-error.hpp
     game-launcher.hpp
+    input.hpp
     key.hpp
     launch-configuration.hpp
     layer.hpp
