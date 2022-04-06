@@ -10,7 +10,7 @@ namespace scp
     {
         // First row.
         // ==========
-        ESCAPE,
+        ESCAPE = 0,
         
         // function keys
         F1,
