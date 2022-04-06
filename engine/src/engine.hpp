@@ -9,6 +9,8 @@
 #include <scp/layer-stack.hpp>
 #include <scp/event-dispatcher.hpp>
 
+#include <chrono>
+
 namespace scp
 {
     struct launch_configuration_t;
@@ -54,6 +56,12 @@ namespace scp
         
         // The outer layer stack.
         layer_stack_t m_global_layer_stack;
+        
+        // Delta time (certain functions requires it)
+        double m_delta_time;
+        
+        // General purposed clock.
+        std::chrono::high_resolution_clock m_clock;
     };
 }
 
