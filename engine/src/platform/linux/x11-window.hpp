@@ -17,6 +17,9 @@ namespace scp::platform::linux_n
     class x11_window_t: public scp::window_t
     {
     public:
+        // The opengl context has be a friend for it to work.
+        friend class x11_opengl_context_t;
+        
         x11_window_t(int32_t width, int32_t height, std::string_view title, event_dispatcher_t& event_dispatcher, bool fullscreen);
         
         // Removed the copy constructor and assignment operators to prevent pr-
