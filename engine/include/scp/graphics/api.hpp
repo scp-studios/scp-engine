@@ -5,8 +5,12 @@ namespace scp::graphics
 {
     enum class api_e
     {
-        opengl, vulkan, direct3d_11, direct3d_12, metal
-    }
+        OPENGL,
+        DIRECT3D_11,
+        DIRECT3D_12,
+        VULKAN,
+        METAL,
+    };
 }
 
 #endif /* EDE6888A_65B2_42C6_92EF_C8529BA6CBD4 */
