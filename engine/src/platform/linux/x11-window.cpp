@@ -6,6 +6,7 @@
 #include <scp/key.hpp>
 #include <scp/events/key.hpp>
 #include <scp/events/mouse.hpp>
+#include <scp/graphics/api.hpp>
 
 #include "x11-keymap.hpp"
 
@@ -16,7 +17,7 @@ using scp::platform::linux_n::x11_window_t;
 const uint8_t Button6 = 6;
 const uint8_t Button7 = 7;
 
-x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p_title, event_dispatcher_t& p_event_dispatcher, bool p_fullscreen): 
+x11_window_t::x11_window_t(int32_t p_width, int32_t p_height, std::string_view p_title, scp::graphics::api_e p_api, event_dispatcher_t& p_event_dispatcher, bool p_fullscreen): 
     m_width(p_width), m_height(p_height), m_fullscreen(p_fullscreen), m_keymap(x11_keymap_t::get_instance()), m_event_dispatcher(p_event_dispatcher)
 {
     m_display_handle = XOpenDisplay(nullptr);

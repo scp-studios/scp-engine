@@ -10,6 +10,11 @@ typedef unsigned long Window;
 typedef unsigned long Atom;
 typedef struct _XDisplay Display;
 
+namespace scp::graphics
+{
+    enum class api_e;
+}
+
 namespace scp::platform::linux_n
 {
     class x11_keymap_t;
@@ -20,7 +25,7 @@ namespace scp::platform::linux_n
         // The opengl context has be a friend for it to work.
         friend class x11_opengl_context_t;
         
-        x11_window_t(int32_t width, int32_t height, std::string_view title, event_dispatcher_t& event_dispatcher, bool fullscreen);
+        x11_window_t(int32_t width, int32_t height, std::string_view title, scp::graphics::api_e api, event_dispatcher_t& event_dispatcher, bool fullscreen);
         
         // Removed the copy constructor and assignment operators to prevent pr-
         // oblems in the future.
