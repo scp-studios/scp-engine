@@ -18,3 +18,4 @@ target_sources(
 )
 
 add_subdirectory(events)
+add_subdirectory(graphics)
